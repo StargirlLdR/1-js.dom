@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Random Table</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            .orange {
+                background-color: orange;
+            }
+        </style>
+        </head>
+    <body>
+        <button onclick="addRandomNumber()">Добавить число</button>
+        <table id="randomTable"></table>
+        <script>
+            function generateRandomNumbers() {
+                var numbers = [];
+                for (var i = 0; i < 30; i++) {
+                    numbers.push(Math.floor(Math.random() * 100)); // Генерируем случайное число от 0 до 99
+                }
+                return numbers;
+            }
+            function createTable(numbers) {
+                var table = document.getElementById("randomTable");
+                var row, cell;
+                for (var i = 0; i < 6; i++) {
+                    row = table.insertRow();
+                    for (var j = 0; j < 5; j++) {
+                        cell = row.insertCell();
+                        var randomNumber = numbers[i * 5 + j];
+                        cell.textContent = randomNumber;
+                        if (randomNumber >= 50) {
+                            cell.classList.add("orange"); // Добавляем класс "orange" для чисел больше или равных 50
+                        }
+                    }
+                }
+            }
+            function addRandomNumber() {
+                var randomNumber = Math.floor(Math.random() * 100);
+                var table = document.getElementById("randomTable");
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+                var cell = row.insertCell();
+                cell.textContent = randomNumber;
+                if (randomNumber >= 50) {
+                    cell.classList.add("orange");
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var numbers = generateRandomNumbers();
+                createTable(numbers);
+            });
+        </script>
+    </body>
+</html>
